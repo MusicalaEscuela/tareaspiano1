@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Piano Experiencia 1 – Entrega de Tareas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f7f8ff;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #6b7280;
+      --brand: #2563eb;
+      --brand-soft: #dbeafe;
+      --border: #e5e7eb;
+      --radius: 22px;
+      --shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+      --ok: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: 
+        radial-gradient(circle at 20% 0%, rgba(173,216,255,0.25), transparent 55%),
+        radial-gradient(circle at 100% 80%, rgba(203,185,255,0.25), transparent 50%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 40px;
+    }
+
+    /* -----------------------------
+       HEADER CON LOGO Y ENCABEZADO
+       ----------------------------- */
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    header img {
+      width: 110px;
+      height: auto;
+      margin: 0 auto 10px;
+      opacity: 0.95;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.1rem;
+      letter-spacing: -0.01em;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 0 auto;
+      color: var(--muted);
+      max-width: 700px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .badge {
+      margin: 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #dbeafe, #ede9fe);
+      color: #1d4ed8;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.18);
+    }
+
+    /* -----------------------------
+          TARJETAS / FORMULARIOS
+       ----------------------------- */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      padding: 24px 26px 26px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(6px);
+    }
+
+    .card-title {
+      margin: 0 0 14px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .card-title small {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+    }
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"] {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      background: #f9fafb;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus {
+      border-color: var(--brand);
+      background: #ffffff;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+    }
+
+    .hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: -4px;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      background: var(--brand-soft);
+      color: var(--brand);
+      border-color: var(--brand);
+    }
+
+    /* -----------------------------
+              EJERCICIOS
+       ----------------------------- */
+    .exercises-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 20px 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .exercises-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) {
+      .exercises-grid { grid-template-columns: 1fr; }
+    }
+
+    .exercise-card {
+      background: #fdfdff;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      transition: 0.2s ease;
+    }
+
+    .exercise-card:hover {
+      border-color: rgba(37,99,235,0.35);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.08);
+    }
+
+    .exercise-card.completed {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .exercise-title {
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .exercise-description {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .pill-ok {
+      background: #dcfce7;
+      color: #166534;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* -----------------------------
+              BOTONES
+       ----------------------------- */
+    button[type="submit"] {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 26px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+      transition: 0.15s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .actions-left {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .status {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      min-height: 20px;
+    }
+
+    .status.ok { color: var(--ok); }
+    .status.error { color: #b91c1c; }
+
+    footer {
+      margin-top: 32px;
+      font-size: 0.75rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    #exercisesSection {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <!-- LOGO DE MUSICALA -->
+      <div style="width:100%; text-align:center; margin-bottom:10px;">
+        <img src="logo.png"
+            alt="Logo Musicala"
+            style="width:90px; height:auto; opacity:0.95;"/>
+      </div>
+
+      <div class="badge">
+        <span>🎹</span> Piano – Experiencia 1
+      </div>
+      <h1>Entrega de tareas en video</h1>
+      <p>
+        Aquí podrás subir tus tareas del curso <strong>Piano Experiencia 1</strong>.  
+        Todas las actividades deben enviarse en formato de video (YouTube, Drive, Loom, etc).
+        Puedes enviar tus ejercicios <strong>uno por uno</strong> o por partes, las veces que necesites.
+        <br><br>
+        <strong>Una vez subas todos los ejercicios de esta experiencia, los revisaremos para que puedas avanzar a las siguientes experiencias.</strong>
+      </p>
+    </header>
+
+    <form id="taskForm" class="card">
+      <!-- PASO 1: SOLO DATOS DEL ESTUDIANTE -->
+      <div class="card-title">
+        <span>Datos del estudiante</span>
+        <small>Escribe tu nombre y correo para entrar a tus tareas</small>
+      </div>
+
+      <div class="grid-2">
+        <label>
+          Nombre completo
+          <input type="text" id="studentName" required placeholder="Tu nombre y apellido" />
+        </label>
+
+        <label>
+          Correo electrónico
+          <input type="email" id="studentEmail" required placeholder="tucorreo@ejemplo.com" />
+        </label>
+      </div>
+
+      <div id="preStep" style="margin: 14px 4px 4px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <span class="hint">Cuando estés listo/a, entra a ver y enviar tus tareas:</span>
+        <button type="button" id="startBtn" class="btn-ghost">
+          <span>👉</span> Ir a mis tareas
+        </button>
+      </div>
+
+      <!-- PASO 2: TAREAS (OCULTO HASTA QUE PONGA NOMBRE Y CORREO) -->
+      <div id="exercisesSection">
+        <p class="hint" style="margin: 6px 4px 4px;">
+          El estado de tus tareas se actualiza automáticamente según el correo que escribiste.
+        </p>
+
+        <h3 class="exercises-section-title">
+          <span>✅</span> Ejercicios de la Experiencia 1
+        </h3>
+        <p class="hint" style="margin: 0 4px 10px;">
+          Pega el enlace del video solo en los ejercicios que vayas a entregar hoy.
+          Puedes volver después y seguir enviando los que falten.
+        </p>
+
+        <div id="exercisesContainer" class="exercises-grid">
+          <!-- Se llena con JS -->
+        </div>
+
+        <div class="actions">
+          <div class="actions-left">
+            Al enviar, solo se registrarán los ejercicios que tengan enlace de video.
+          </div>
+          <button type="submit" id="submitBtn">
+            Enviar tareas
+            <span id="btnSpinner" style="display:none;">⏳</span>
+          </button>
+        </div>
+
+        <div id="statusMsg" class="status"></div>
+      </div>
+    </form>
+
+    <footer>
+      Piano Experiencia 1 · Musicala · Entrega de tareas en video
+    </footer>
+  </div>
+
+  <script>
+    /****************************************************
+     * CONFIGURACIÓN – REEMPLAZAR POR TU WEB APP
+     ****************************************************/
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx6Kj8r1ofoita9S3SO3J_grBQmdSeQSkt_45fMs73or157uEa_WQGlZnI0krAd471a/exec';
+
+    /****************************************************
+     * LISTA DE EJERCICIOS
+     ****************************************************/
+    const EXERCISES = [
+      { id: 'calentamiento',  label: 'Rutina de calentamiento', desc: '' },
+      { id: 'postura',        label: 'Postura', desc: 'Posición del cuerpo, manos y distancia respecto al piano.' },
+      { id: 'gim-dactilar-1', label: 'Gimnasia dactilar individuales', desc: 'Ejercicios dedo por dedo, manos separadas o juntas.' },
+      { id: 'gim-dactilar-2', label: 'Gimnasia dactilar dobles', desc: 'Ejercicios con dos notas simultáneas.' },
+      { id: 'patrones',       label: 'Patrones', desc: 'Patrones rítmicos o melódicos trabajados en clase.' },
+      { id: 'escala-do',      label: 'Escala de Do mayor', desc: 'Manos separadas o juntas según lo acordado con tu docente.' },
+      { id: 'escala-sol',     label: 'Escala de Sol mayor', desc: 'Recuerda el fa sostenido y la digitación correcta.' },
+      { id: 'acorde-do',      label: 'Acorde de Do mayor', desc: 'Posición básica, inversiones o arpegios según el nivel.' },
+      { id: 'acorde-sol',     label: 'Acorde de Sol mayor', desc: 'Revisa la afinación y el cambio entre acordes.' },
+      { id: 'independencia',  label: 'Ejercicios de independencia iniciales 1–13', desc: 'Ejercicios de independencia de manos del 1 al 13.' },
+      { id: 'canciones',      label: 'Canciones (3 canciones nivel 1)', desc: 'Puedes enviar una canción por video o varias en un solo video.' },
+      { id: 'lectura-lineas', label: 'Lectura de líneas en el pentagrama', desc: 'Ejercicios de lectura en las líneas del pentagrama.' },
+      { id: 'ritmo-1-9',      label: 'Ejercicios 1–9 de iniciación al ritmo', desc: 'Redondas, blancas y negras: palmas, conteo y/o piano.' }
+    ];
+
+    /****************************************************
+     * REFERENCIAS DOM
+     ****************************************************/
+    const container        = document.getElementById('exercisesContainer');
+    const form             = document.getElementById('taskForm');
+    const statusMsg        = document.getElementById('statusMsg');
+    const submitBtn        = document.getElementById('submitBtn');
+    const btnSpinner       = document.getElementById('btnSpinner');
+    const emailInput       = document.getElementById('studentEmail');
+    const nameInput        = document.getElementById('studentName');
+    const startBtn         = document.getElementById('startBtn');
+    const exercisesSection = document.getElementById('exercisesSection');
+
+    /****************************************************
+     * RENDER DE EJERCICIOS
+     ****************************************************/
+    EXERCISES.forEach((ex, idx) => {
+      const card = document.createElement('div');
+      card.className = 'exercise-card';
+      card.dataset.exerciseId = ex.id;
+
+      card.innerHTML = `
+        <div class="exercise-title">
+          <span>${ex.label}</span>
+          <span class="index">Ej. ${idx + 1}</span>
+          <span class="pill-ok" data-badge-for="${ex.id}" style="display:none;">
+            <span>✔</span> Ya enviado
+          </span>
+        </div>
+        <div class="exercise-body">
+          <label>
+            Enlace del video
+            <input
+              type="url"
+              inputmode="url"
+              placeholder="https://youtu.be/…  ·  https://drive.google.com/…"
+              data-exercise-id="${ex.id}"
+            />
+          </label>
+          <div class="exercise-description">
+            ${ex.desc || 'Graba este ejercicio y comparte aquí el enlace del video.'}
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    /****************************************************
+     * UTILIDADES DE ESTADO
+     ****************************************************/
+    function setStatus(message, type = '') {
+      statusMsg.textContent = message;
+      statusMsg.className = 'status ' + (type ? type : '');
+    }
+
+    function setLoading(isLoading) {
+      if (!submitBtn || !btnSpinner) return;
+      if (isLoading) {
+        submitBtn.disabled = true;
+        btnSpinner.style.display = 'inline';
+      } else {
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+      }
+    }
+
+    /****************************************************
+     * CONSULTA AL SERVIDOR: EJERCICIOS ENVIADOS POR EMAIL
+     ****************************************************/
+    async function fetchCompletedExercises(email) {
+      const url = `${SCRIPT_URL}?email=${encodeURIComponent(email)}`;
+      const res = await fetch(url);
+
+      if (!res.ok) {
+        throw new Error('Error de red al consultar estado');
+      }
+
+      const data = await res.json();
+      if (data.status !== 'ok') {
+        throw new Error(data.message || 'Error al consultar ejercicios');
+      }
+
+      return Array.isArray(data.exercises) ? data.exercises : [];
+    }
+
+    async function renderCompletedBadgesFromServer(email) {
+      if (!email) {
+        setStatus('Escribe tu correo para ver tus ejercicios enviados.', 'error');
+        return;
+      }
+
+      setStatus('Buscando tus tareas enviadas...', '');
+      try {
+        const completed = await fetchCompletedExercises(email);
+        const cards = container.querySelectorAll('.exercise-card');
+
+        cards.forEach((card) => {
+          const exId  = card.dataset.exerciseId;
+          const badge = card.querySelector(`[data-badge-for="${exId}"]`);
+          const isCompleted = completed.includes(exId);
+
+          if (isCompleted) {
+            card.classList.add('completed');
+            if (badge) badge.style.display = 'inline-flex';
+          } else {
+            card.classList.remove('completed');
+            if (badge) badge.style.display = 'none';
+          }
+        });
+
+        if (completed.length > 0) {
+          setStatus('Se marcaron como “Ya enviado” los ejercicios recibidos con este correo.', 'ok');
+        } else {
+          setStatus('Aún no hemos recibido ejercicios con este correo.', '');
+        }
+      } catch (err) {
+        console.error(err);
+        setStatus('No pudimos consultar tus tareas. Revisa tu conexión o intenta más tarde.', 'error');
+      }
+    }
+
+    /****************************************************
+     * PASO 1: BOTÓN "IR A MIS TAREAS"
+     ****************************************************/
+    startBtn.addEventListener('click', () => {
+      const name  = nameInput.value.trim();
+      const email = emailInput.value.trim();
+
+      if (!name || !email) {
+        setStatus('Por favor escribe tu nombre y tu correo para continuar.', 'error');
+        return;
+      }
+
+      // Mostrar sección de ejercicios
+      exercisesSection.style.display = 'block';
+      setStatus('', '');
+
+      // Actualizar estado desde la hoja para ese correo
+      renderCompletedBadgesFromServer(email);
+
+      // Scroll suave hacia la sección de ejercicios
+      exercisesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    /****************************************************
+     * CAMBIO DE CORREO: ACTUALIZAR ESTADO AUTOMÁTICO
+     ****************************************************/
+    emailInput.addEventListener('blur', () => {
+      const email = emailInput.value.trim();
+      if (!email) return;
+      // Si ya están viendo las tareas, actualizamos de una
+      if (exercisesSection.style.display === 'block') {
+        renderCompletedBadgesFromServer(email);
+      }
+    });
+
+    /****************************************************
+     * ENVÍO DEL FORMULARIO (POST a Apps Script)
+     ****************************************************/
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('', '');
+      setLoading(true);
+
+      const studentName  = nameInput.value.trim();
+      const studentEmail = emailInput.value.trim();
+
+      if (!studentName || !studentEmail) {
+        setStatus('Por favor completa tu nombre y tu correo.', 'error');
+        setLoading(false);
+        return;
+      }
+
+      const inputs = container.querySelectorAll('input[type="url"]');
+      const submissions = [];
+
+      inputs.forEach((input) => {
+        const url = input.value.trim();
+        if (!url) return;
+        const exId = input.getAttribute('data-exercise-id');
+        const exInfo = EXERCISES.find((ex) => ex.id === exId);
+        submissions.push({
+          exerciseId: exId,
+          exerciseName: exInfo ? exInfo.label : exId,
+          videoUrl: url
+        });
+      });
+
+      if (submissions.length === 0) {
+        setStatus('Debes enviar al menos un ejercicio con enlace de video.', 'error');
+        setLoading(false);
+        return;
+      }
+
+      const payload = {
+        studentName,
+        studentEmail,
+        course: 'Piano Experiencia 1',
+        submissions,
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        setStatus('✅ Tareas enviadas. ¡Buen trabajo! Puedes seguir subiendo las que falten cuando quieras.', 'ok');
+
+        // Limpiar solo los ejercicios enviados
+        const sentIds = submissions.map(s => s.exerciseId);
+        inputs.forEach((input) => {
+          const exId = input.getAttribute('data-exercise-id');
+          if (sentIds.includes(exId)) {
+            input.value = '';
+          }
+        });
+
+        // Volver a consultar al servidor para marcar “Ya enviado”
+        renderCompletedBadgesFromServer(studentEmail);
+      } catch (err) {
+        console.error(err);
+        setStatus('Ocurrió un error al enviar. Revisa tu conexión o intenta más tarde.', 'error');
+      } finally {
+        setLoading(false);
+      }
+    });
+  </script>
+</body>
+</html>
